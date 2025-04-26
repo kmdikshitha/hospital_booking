@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Doctors at {{ hospital.name }}</h2>
+<ul>
+  {% for doctor in doctors %}
+    <li>
+      Dr. {{ doctor.name }} ({{ doctor.specialty }}) -
+      <a href="{{ url_for('main.book_doctor', id=doctor.id) }}">Book</a>
+    </li>
+  {% endfor %}
+</ul>
+<a href="{{ url_for('main.dashboard') }}">← Back to Dashboard</a>
+{% endblock %}

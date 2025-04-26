@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Add Hospital</h2>
+<form method="POST">
+    Hospital Name: <input type="text" name="name" required><br><br>
+    Location:
+    <select name="location_id" required>
+        {% for location in locations %}
+        <option value="{{ location.id }}">{{ location.region }}</option>
+        {% endfor %}
+    </select><br><br>
+    <input type="submit" value="Add Hospital">
+</form>
+{% endblock %}

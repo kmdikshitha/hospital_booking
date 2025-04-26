@@ -1,4 +1,4 @@
-id,name,specialty,hospital_id
+id,name,specialization,hospital_id
 1,Dr. Alice Smith,Cardiologist,1
 2,Dr. Bob Johnson,Dermatologist,2
 3,Dr. Clara Lee,Pediatrician,1

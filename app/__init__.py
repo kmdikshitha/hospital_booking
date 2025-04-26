@@ -2,6 +2,7 @@ from flask import Flask
 from app.models import db
 from flask_login import LoginManager
 from flask_migrate import Migrate
+import logging
 
 login_manager = LoginManager()
 migrate = Migrate()
@@ -9,6 +10,9 @@ migrate = Migrate()
 def create_app():
     app = Flask(__name__)
     app.config.from_object('config.Config')
+
+    # Setup logging
+    logging.basicConfig(level=logging.INFO)  # You can set this to DEBUG for more verbose logging
 
     db.init_app(app)
     migrate.init_app(app, db)

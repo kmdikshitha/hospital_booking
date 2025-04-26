@@ -18,30 +18,41 @@ def load_doctors():
         doctor = Doctor(
             name=row['name'],
             specialization=row['specialization'],
-            hospital_id=row['hospital_id']
+            hospital_id=row['hospital_id']  
         )
         db.session.add(doctor)
+        print(f"✅ Loaded doctor: {row['name']}") 
     db.session.commit()
+
 
 def load_users():
     df = pd.read_csv('schema/users.csv')
     for _, row in df.iterrows():
+        # Here you can define the admin username directly or from the CSV if needed
+        role = 'admin' if row['username'] == 'admin' else 'user'  # Adjust this based on your admin username
+        
+        # Hash the password before saving to the database
+        hashed_password = generate_password_hash(row['password'])  # Hash the password for security
+
         user = User(
-            name=row['name'],
-            password=row['password'],
-            role=row['role']
+            username=row['username'],            
+            password=hashed_password,  # Store the hashed password
+            role=role  # Assign the role based on the username
         )
         db.session.add(user)
+        print(f"✅ Loaded user: {row['username']} with role: {role}")
+    
     db.session.commit()
+
+
+
 
 def load_appointments():
     df = pd.read_csv('schema/appointments.csv')
     for _, row in df.iterrows():
         appointment = Appointment(
             user_id=row['user_id'],
-            doctor_id=row['doctor_id'],
-            user=row['user'],
-            doctor=row['doctor']
+            doctor_id=row['doctor_id']
         )
         db.session.add(appointment)
     db.session.commit()

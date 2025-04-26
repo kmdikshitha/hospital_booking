@@ -1,10 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Login</h2>
-<form method="POST">
-    Username: <input type="text" name="username" required><br><br>
-    Password: <input type="password" name="password" required><br><br>
-    <input type="submit" value="Login">
+<h2>Dashboard</h2>
+
+<!-- Search Hospitals -->
+<form method="GET" action="{{ url_for('main.dashboard') }}">
+    Location: <input type="text" name="location" placeholder="Enter location">
+    <input type="submit" value="Search">
 </form>
-<p>No account? <a href="{{ url_for('main.register') }}">Register here</a></p>
+
+<!-- Show Hospitals -->
+<ul>
+    {% for hospital in hospitals %}
+        <li>{{ hospital.name }} - {{ hospital.location }}</li>
+    {% endfor %}
+</ul>
+
 {% endblock %}

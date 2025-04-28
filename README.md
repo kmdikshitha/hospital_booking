@@ -44,8 +44,14 @@ flask db init
 flask db migrate -m "Initial migration"
 flask db upgrade
 
+#load csv data
+flask shell
+from app.data_loader import load_all
+load_all()
+
 # Step 5: Run the server
 flask run
+
 
 For Mac/OS
 
@@ -64,6 +70,11 @@ export FLASK_APP=app
 flask db init
 flask db migrate -m "Initial migration"
 flask db upgrade
+
+#load csv data
+flask shell
+from app.data_loader import load_all
+load_all()
 
 # Step 5: Run the server
 flask run

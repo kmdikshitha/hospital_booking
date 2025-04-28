@@ -1,6 +1,8 @@
 import pandas as pd
 from app import create_app, db
 from app.models import Hospital, Doctor, User, Appointment, Location
+from werkzeug.security import generate_password_hash
+
 
 app = create_app()
 app.app_context().push()
@@ -27,22 +29,21 @@ def load_doctors():
 
 def load_users():
     df = pd.read_csv('schema/users.csv')
+
     for _, row in df.iterrows():
-        # Here you can define the admin username directly or from the CSV if needed
-        role = 'admin' if row['username'] == 'admin' else 'user'  # Adjust this based on your admin username
-        
-        # Hash the password before saving to the database
-        hashed_password = generate_password_hash(row['password'])  # Hash the password for security
+        # Always hash the password from CSV, even for admin
+        hashed_password = generate_password_hash(row['password'])  
 
         user = User(
-            username=row['username'],            
-            password=hashed_password,  # Store the hashed password
-            role=role  # Assign the role based on the username
+            username=row['username'],
+            password=hashed_password,
+            role=row['role']  # Directly use 'role' from CSV
         )
         db.session.add(user)
-        print(f"✅ Loaded user: {row['username']} with role: {role}")
+        print(f"✅ Loaded user: {row['username']} with role: {row['role']}")
     
     db.session.commit()
+
 
 
 

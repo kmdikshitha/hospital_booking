@@ -11,8 +11,17 @@
 <!-- Show Hospitals -->
 <ul>
     {% for hospital in hospitals %}
-        <li>{{ hospital.name }} - {{ hospital.location }}</li>
+        <li>
+            {{ hospital.name }} - 
+            {% if hospital.location %}
+                {{ hospital.location.region }}
+            {% else %}
+                [No Location]
+            {% endif %}
+            <a href="{{ url_for('main.doctors', hospital_id=hospital.id) }}">Select</a>
+        </li>
     {% endfor %}
 </ul>
 
 {% endblock %}
+

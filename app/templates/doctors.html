@@ -4,7 +4,7 @@
 <ul>
   {% for doctor in doctors %}
     <li>
-      Dr. {{ doctor.name }} ({{ doctor.specialty }}) -
+      Dr. {{ doctor.name }} ({{ doctor.specialization }}) -
       <a href="{{ url_for('main.book_doctor', id=doctor.id) }}">Book</a>
     </li>
   {% endfor %}

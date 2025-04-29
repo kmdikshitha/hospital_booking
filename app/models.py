@@ -17,6 +17,16 @@ class Doctor(db.Model):
     hospital_id = db.Column(db.Integer, db.ForeignKey('hospital.id'))
     hospital = db.relationship('Hospital', backref='doctors')
 
+class Availability(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'), nullable=False)
+    date = db.Column(db.Date, nullable=False)
+    time = db.Column(db.Time, nullable=False)
+    is_booked = db.Column(db.Boolean, default=False)
+    
+    doctor = db.relationship('Doctor', backref='availabilities')
+
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
@@ -30,6 +40,7 @@ class Appointment(db.Model):
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'))
     user = db.relationship('User', backref='appointments')
     doctor = db.relationship('Doctor', backref='appointments')
+
 
 class Location(db.Model):
     id = db.Column(db.Integer, primary_key=True)

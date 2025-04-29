@@ -1,0 +1,25 @@
+<!-- add_availability.html -->
+{% extends "base.html" %}
+{% block content %}
+  <h2>Add Availability</h2>
+  <form method="POST">
+    <label for="doctor_id">Doctor</label>
+    <select name="doctor_id" required>
+      {% for doc in doctors %}
+        <option value="{{ doc.id }}">{{ doc.name }}</option>
+      {% endfor %}
+    </select><br>
+
+    <label for="date">Date</label>
+    <input type="date" name="date" required><br>
+
+    <label for="from_time">From Time</label>
+    <input type="time" name="from_time" required><br>
+
+<label for="to_time">To Time</label>
+<input type="time" name="to_time" required><br>
+
+
+    <input type="submit" value="Add Slot">
+  </form>
+{% endblock %}

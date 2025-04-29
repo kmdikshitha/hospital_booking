@@ -1,6 +1,7 @@
+from datetime import datetime, timedelta
 from flask import Blueprint, render_template, redirect, request, url_for, flash, session
 from flask_login import login_user, logout_user, login_required, current_user
-from app.models import db, User, Hospital, Doctor, Appointment, Location
+from app.models import Availability, db, User, Hospital, Doctor, Appointment, Location
 from sqlalchemy.orm import joinedload
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import current_app
@@ -107,12 +108,32 @@ def doctors(hospital_id):
 @login_required
 def book_doctor(id):
     doctor = Doctor.query.get_or_404(id)
+    
+    # Retrieve availability for the selected doctor where the slot is not booked
+    available_slots = Availability.query.filter_by(doctor_id=doctor.id, is_booked=False).all()
+
     if request.method == 'POST':
+        slot_id = request.form['slot_id']
+        slot = Availability.query.get_or_404(slot_id)
+        
+        if slot.is_booked:
+            flash('This time slot is already booked.')
+            return redirect(request.url)
+
+        # Mark the slot as booked
+        slot.is_booked = True
+
+        # Create appointment (this assumes appointment model and user logic is set up)
         appt = Appointment(user_id=current_user.id, doctor_id=id)
         db.session.add(appt)
         db.session.commit()
+        
+        flash('Appointment booked successfully!')
         return redirect(url_for('main.confirmation'))
-    return render_template('book.html', doctor=doctor)
+
+    return render_template('book.html', doctor=doctor, available_slots=available_slots)
+
+
 
 # Confirmation
 @main.route('/confirm')
@@ -213,3 +234,48 @@ def add_doctor():
         return redirect(url_for('main.admin_dashboard'))
     
     return render_template('add_doctor.html', hospitals=hospitals)
+
+@main.route('/admin/add_availability', methods=['GET', 'POST'])
+@login_required
+def add_availability():
+    if current_user.role != 'admin':
+        flash('Unauthorized access.')
+        return redirect(url_for('main.dashboard'))
+
+    doctors = Doctor.query.all()
+
+    if request.method == 'POST':
+        doctor_id = request.form['doctor_id']
+        date = request.form['date']
+        from_time = request.form['from_time']
+        to_time = request.form['to_time']
+
+        date_obj = datetime.strptime(date, "%Y-%m-%d").date()
+        start_time = datetime.strptime(from_time, "%H:%M")
+        end_time = datetime.strptime(to_time, "%H:%M")
+
+        # Add 30-minute slots between start and end times
+        current_time = start_time
+        while current_time < end_time:
+            slot_time = current_time.time()
+            exists = Availability.query.filter_by(
+                doctor_id=doctor_id,
+                date=date_obj,
+                time=slot_time
+            ).first()
+
+            if not exists:
+                availability = Availability(
+                    doctor_id=doctor_id,
+                    date=date_obj,
+                    time=slot_time
+                )
+                db.session.add(availability)
+
+            current_time += timedelta(minutes=30)
+
+        db.session.commit()
+        flash("Availability slots added!")
+        return redirect(url_for('main.admin_dashboard'))
+
+    return render_template('add_availability.html', doctors=doctors)

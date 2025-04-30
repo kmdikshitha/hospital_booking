@@ -5,12 +5,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+    {% if request.endpoint not in ['main.login', 'main.register'] %}
     <nav>
         <a href="{{ url_for('main.dashboard') }}">Dashboard</a> |
         <a href="{{ url_for('main.view_appointments') }}">Appointments</a> |
         <a href="{{ url_for('main.logout') }}">Logout</a>
     </nav>
     <hr>
+    {% endif %}
+
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         {% for msg in messages %}

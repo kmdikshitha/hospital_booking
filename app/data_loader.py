@@ -1,8 +1,8 @@
 import pandas as pd
 from app import create_app, db
-from app.models import Hospital, Doctor, User, Appointment, Location
+from app.models import Hospital, Doctor, User, Appointment, Location, Availability
 from werkzeug.security import generate_password_hash
-
+from datetime import datetime, date, time
 
 app = create_app()
 app.app_context().push()
@@ -53,7 +53,8 @@ def load_appointments():
     for _, row in df.iterrows():
         appointment = Appointment(
             user_id=row['user_id'],
-            doctor_id=row['doctor_id']
+            doctor_id=row['doctor_id'],
+            slot_id=row['slot_id']
         )
         db.session.add(appointment)
     db.session.commit()
@@ -65,12 +66,27 @@ def load_locations():
         db.session.add(location)
     db.session.commit()
 
+def load_availability():
+    df = pd.read_csv('schema/availabilty.csv')
+    for _, row in df.iterrows():
+        # Parse string to actual date and time objects
+        availability = Availability(
+            doctor_id=row['doctor_id'],
+            date=datetime.strptime(row['date'], "%Y-%m-%d").date(),
+            from_time=datetime.strptime(row['from_time'], "%H:%M").time(),
+            to_time=datetime.strptime(row['to_time'], "%H:%M").time(),
+            is_booked=row['is_booked'] in [True, 'True', 'true', 1]  # Normalize booleans
+        )
+        db.session.add(availability)
+    db.session.commit()
+
 def load_all():
     load_locations()
     load_hospitals()
     load_doctors()
     load_users()
     load_appointments()
+    load_availability()
     print("✅ All data loaded successfully.")
 
 # Run directly

@@ -1,13 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Doctors at {{ hospital.name }}</h2>
-<ul>
+<h2 style="text-align: center; margin-bottom: 2rem;">Doctors at {{ hospital.name }}</h2>
+
+<div class="doctor-list">
   {% for doctor in doctors %}
-    <li>
-      Dr. {{ doctor.name }} ({{ doctor.specialization }}) -
-      <a href="{{ url_for('main.book_doctor', id=doctor.id) }}">Book</a>
-    </li>
+    <div class="doctor-card">
+      <span class="doctor-info">
+        {{ doctor.name }} ({{ doctor.specialization }})
+      </span>
+      <a href="{{ url_for('main.book_doctor', id=doctor.id) }}" class="book-button">Select</a>
+    </div>
   {% endfor %}
-</ul>
-<a href="{{ url_for('main.dashboard') }}">← Back to Dashboard</a>
+</div>
+
+<div style="text-align: center; margin-top: 2rem;">
+  <a href="{{ url_for('main.dashboard') }}" class="back-link">← Back to Dashboard</a>
+</div>
 {% endblock %}

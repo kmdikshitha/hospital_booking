@@ -124,7 +124,7 @@ def book_doctor(id):
         slot.is_booked = True
 
         # Create appointment (this assumes appointment model and user logic is set up)
-        appt = Appointment(user_id=current_user.id, doctor_id=id)
+        appt = Appointment(user_id=current_user.id, doctor_id=doctor.id, slot_id=slot.id)
         db.session.add(appt)
         db.session.commit()
         

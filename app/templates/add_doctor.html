@@ -1,15 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Add Doctor</h2>
-<form method="POST">
-    Doctor Name: <input type="text" name="name" required><br><br>
-    Specialization: <input type="text" name="specialization" required><br><br>
-    Hospital:
-    <select name="hospital_id" required>
-        {% for hospital in hospitals %}
-        <option value="{{ hospital.id }}">{{ hospital.name }}</option>
-        {% endfor %}
-    </select><br><br>
-    <input type="submit" value="Add Doctor">
-</form>
+<div class="doctor-form-container">
+    <div class="doctor-form-box">
+        <h2>Add New Doctor</h2>
+        <form method="POST">
+            <label for="name">Doctor Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter doctor's name" required>
+
+            <label for="specialization">Specialization</label>
+            <input type="text" id="specialization" name="specialization" placeholder="Enter specialization" required>
+
+            <label for="hospital">Hospital</label>
+            <select name="hospital_id" id="hospital" required>
+                {% for hospital in hospitals %}
+                    <option value="{{ hospital.id }}">{{ hospital.name }}</option>
+                {% endfor %}
+            </select>
+
+            <input type="submit" value="Add Doctor">
+        </form>
+    </div>
+</div>
 {% endblock %}

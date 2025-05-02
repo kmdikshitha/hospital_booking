@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 
+
 db = SQLAlchemy()
 
 class Hospital(db.Model):
@@ -21,7 +22,8 @@ class Availability(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'), nullable=False)
     date = db.Column(db.Date, nullable=False)
-    time = db.Column(db.Time, nullable=False)
+    from_time = db.Column(db.Time, nullable=False)
+    to_time = db.Column(db.Time, nullable=False)
     is_booked = db.Column(db.Boolean, default=False)
     
     doctor = db.relationship('Doctor', backref='availabilities')
@@ -38,8 +40,11 @@ class Appointment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'))
+    slot_id = db.Column(db.Integer, db.ForeignKey('availability.id'))
+
     user = db.relationship('User', backref='appointments')
     doctor = db.relationship('Doctor', backref='appointments')
+    slot = db.relationship('Availability')
 
 
 class Location(db.Model):

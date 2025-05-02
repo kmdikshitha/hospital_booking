@@ -1,0 +1,91 @@
+/* Full viewport height */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Center container */
+.center-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Inner container box */
+.form-box {
+    background-color: #1f1f1f;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Heading */
+.form-box h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* Labels */
+.form-box label {
+    display: block;
+    text-align: left;
+    color: #ddd;
+    margin-top: 10px;
+}
+
+/* Input fields */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    box-sizing: border-box;
+}
+
+/* Submit button */
+input[type="submit"] {
+    background-color: #990000;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #cc0000;
+}
+
+/* Link paragraph */
+.form-box p {
+    margin-top: 20px;
+    color: white;
+}
+
+/* Register/Login link */
+.form-box p a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.form-box p a:hover {
+    text-decoration: underline;
+}
+
+/* Hide navbar on auth pages */
+.hide-nav nav {
+    display: none;
+}

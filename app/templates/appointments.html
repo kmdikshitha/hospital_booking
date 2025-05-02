@@ -1,14 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Your Appointments</h2>
-<ul>
+<h2 class="section-title">Your Appointments</h2>
+
+<div class="appointments-container">
   {% for appt in appointments %}
-    <li>
-      Dr. {{ appt.doctor.name }} ({{ appt.doctor.specialty }}) at {{ appt.doctor.hospital.name }}
-      <form action="{{ url_for('main.delete_appointment', id=appt.id) }}" method="POST" style="display:inline;">
-        <input type="submit" value="Delete">
+    <div class="appointment-card">
+      <div class="appointment-header">
+        <h3>{{ appt.doctor.name }}</h3>
+        <span class="specialization">{{ appt.doctor.specialization }}</span>
+      </div>
+      <div class="appointment-body">
+        <p><strong>Hospital:</strong> {{ appt.doctor.hospital.name }}</p>
+        <p><strong>Date:</strong> {{ appt.slot.date.strftime('%B %d, %Y') }}</p>
+        <p><strong>Time:</strong> {{ appt.slot.from_time.strftime('%I:%M %p') }} – {{ appt.slot.to_time.strftime('%I:%M %p') }}</p>
+      </div>
+      <form action="{{ url_for('main.delete_appointment', id=appt.id) }}" method="POST">
+        <input type="submit" value="Cancel Appointment" class="delete-btn">
       </form>
-    </li>
+    </div>
   {% endfor %}
-</ul>
+</div>
 {% endblock %}

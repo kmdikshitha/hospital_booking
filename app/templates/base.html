@@ -6,12 +6,16 @@
 </head>
 <body>
     {% if request.endpoint not in ['main.login', 'main.register'] %}
-    <nav>
-        <a href="{{ url_for('main.dashboard') }}">Dashboard</a> |
-        <a href="{{ url_for('main.view_appointments') }}">Appointments</a> |
-        <a href="{{ url_for('main.logout') }}">Logout</a>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span class="brand-name">MediSlot</span>
+        </div>
+        <div class="navbar-right">
+            <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('main.view_appointments') }}">Appointments</a>
+            <a href="{{ url_for('main.logout') }}">Logout</a>
+        </div>
     </nav>
-    <hr>
     {% endif %}
 
     {% with messages = get_flashed_messages() %}
@@ -21,6 +25,7 @@
         {% endfor %}
       {% endif %}
     {% endwith %}
+    
     {% block content %}{% endblock %}
 </body>
 </html>

@@ -255,31 +255,29 @@ def add_availability():
         to_time = request.form['to_time']
 
         date_obj = datetime.strptime(date, "%Y-%m-%d").date()
-        start_time = datetime.strptime(from_time, "%H:%M")
-        end_time = datetime.strptime(to_time, "%H:%M")
+        start_time = datetime.strptime(from_time, "%H:%M").time()
+        end_time = datetime.strptime(to_time, "%H:%M").time()
 
-        # Add 30-minute slots between start and end times
-        current_time = start_time
-        while current_time < end_time:
-            slot_time = current_time.time()
-            exists = Availability.query.filter_by(
+        exists = Availability.query.filter_by(
+            doctor_id=doctor_id,
+            date=date_obj,
+            from_time=start_time,
+            to_time=end_time
+        ).first()
+
+        if exists:
+            flash("Availability already exists for the selected doctor and time.")
+        else:
+            availability = Availability(
                 doctor_id=doctor_id,
                 date=date_obj,
-                time=slot_time
-            ).first()
+                from_time=start_time,
+                to_time=end_time
+            )
+            db.session.add(availability)
+            db.session.commit()
+            flash("Availability added successfully!")
 
-            if not exists:
-                availability = Availability(
-                    doctor_id=doctor_id,
-                    date=date_obj,
-                    time=slot_time
-                )
-                db.session.add(availability)
-
-            current_time += timedelta(minutes=30)
-
-        db.session.commit()
-        flash("Availability slots added!")
         return redirect(url_for('main.admin_dashboard'))
 
     return render_template('add_availability.html', doctors=doctors)

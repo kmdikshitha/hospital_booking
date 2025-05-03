@@ -11,7 +11,11 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def home():
-    return redirect(url_for('main.login'))
+    # Check if the request is from a cron job (based on User-Agent or any other header)
+    if request.headers.get('User-Agent') == 'Cron':
+        return "App is running", 200  
+    else:
+        return redirect(url_for('main.login'))
 
 # Register
 @main.route('/register', methods=['GET', 'POST'])

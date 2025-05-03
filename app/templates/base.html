@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Hospital Appointment System</title>
@@ -26,6 +26,93 @@
       {% endif %}
     {% endwith %}
     
+    {% block content %}{% endblock %}
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital Appointment System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Toast container positioning */
+        #toast-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        /* Toast style */
+        .toast {
+            background-color: #333;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            margin-top: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            min-width: 200px;
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    {% if request.endpoint not in ['main.login', 'main.register'] %}
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span class="brand-name">MediSlot</span>
+        </div>
+        <div class="navbar-right">
+            <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('main.view_appointments') }}">Appointments</a>
+            <a href="{{ url_for('main.logout') }}">Logout</a>
+        </div>
+    </nav>
+    {% endif %}
+
+    <!-- Toast container -->
+    <div id="toast-container"></div>
+
+   <!-- Inside <body> -->
+<script id="flash-data" type="application/json">
+  {{ get_flashed_messages() | tojson }}
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const flashDataScript = document.getElementById("flash-data");
+      const messages = JSON.parse(flashDataScript.textContent);
+      const container = document.getElementById('toast-container');
+
+      messages.forEach(msg => {
+          const toast = document.createElement('div');
+          toast.className = 'toast';
+          toast.innerText = msg;
+          container.appendChild(toast);
+
+          setTimeout(() => toast.classList.add('show'), 100);
+
+          setTimeout(() => {
+              toast.classList.remove('show');
+              setTimeout(() => toast.remove(), 300);
+          }, 3000);
+      });
+  });
+</script>
+
     {% block content %}{% endblock %}
 </body>
 </html>

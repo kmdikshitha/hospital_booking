@@ -43,7 +43,7 @@ def load_users():
         print(f"✅ Loaded user: {row['username']} with role: {row['role']}")
     
     db.session.commit()
-    
+
 def load_locations():
     df = pd.read_csv('schema/locations.csv')
     for _, row in df.iterrows():
@@ -70,7 +70,6 @@ def load_all():
     load_hospitals()
     load_doctors()
     load_users()
-    load_appointments()
     load_availability()
     print("✅ All data loaded successfully.")
 

@@ -2,9 +2,11 @@ from flask import Flask
 from app.models import db
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from dotenv import load_dotenv
 import logging
 
 login_manager = LoginManager()
+load_dotenv()
 migrate = Migrate()
 
 def create_app():

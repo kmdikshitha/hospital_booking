@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="center-form-container">
+    <div class="form-box">
+        <h2 style="text-align: center; margin-bottom: 1rem;">Sign up for MediSlot</h2>
+        <form method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="submit" value="Register" class="submit-btn">
+        </form>
+        <p style="text-align: center;">Already registered? <a href="{{ url_for('main.login') }}">Login here</a></p>
+    </div>
+</div>
+{% endblock %}

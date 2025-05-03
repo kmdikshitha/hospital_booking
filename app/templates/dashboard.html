@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 style="text-align: center; margin-bottom: 2rem;">Dashboard</h2>
+
+<!-- Search Hospitals -->
+<div class="search-section">
+    <h3>Search for Location</h3>
+    <form method="GET" action="{{ url_for('main.dashboard') }}" class="search-form">
+        <input type="text" name="location" placeholder="Enter location" class="search-input">
+        <input type="submit" value="Search" class="search-button">
+    </form>
+</div>
+
+<!-- Show Hospitals -->
+<div class="hospital-list">
+    {% for hospital in hospitals %}
+        <div class="hospital-card">
+            <span class="hospital-name">{{ hospital.name }}</span>
+            <span class="hospital-location">
+                {% if hospital.location %}
+                    {{ hospital.location.region }}
+                {% else %}
+                    [No Location]
+                {% endif %}
+            </span>
+            <a href="{{ url_for('main.doctors', hospital_id=hospital.id) }}" class="select-button">Select</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

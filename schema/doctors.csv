@@ -1,0 +1,61 @@
+id,name,specialization,hospital_id
+1,Dr. Alice Smith,Cardiology,1
+2,Dr. Bob Johnson,Pediatrics,1
+3,Dr. Clara Adams,Orthopedics,1
+4,Dr. Daniel Clark,Dermatology,2
+5,Dr. Eva Lewis,Neurology,2
+6,Dr. Frank Moore,Internal Medicine,2
+7,Dr. Grace Hill,General Surgery,3
+8,Dr. Henry Young,Psychiatry,3
+9,Dr. Irene Hall,Endocrinology,3
+10,Dr. Jack Lee,ENT,4
+11,Dr. Karen Scott,Cardiology,4
+12,Dr. Leo Turner,Urology,4
+13,Dr. Maria Harris,Pediatrics,5
+14,Dr. Nathan Reed,Oncology,5
+15,Dr. Olivia Brooks,Family Medicine,5
+16,Dr. Paul Ward,Orthopedics,6
+17,Dr. Quinn Cox,Dermatology,6
+18,Dr. Rachel Diaz,Neurology,6
+19,Dr. Steve Long,Cardiology,7
+20,Dr. Tina Kelly,Internal Medicine,7
+21,Dr. Uma Bell,OB/GYN,7
+22,Dr. Victor Green,ENT,8
+23,Dr. Wendy Price,Pediatrics,8
+24,Dr. Xavier Barnes,Orthopedics,8
+25,Dr. Yvonne Ross,Cardiology,9
+26,Dr. Zach Foster,General Surgery,9
+27,Dr. Anita Griffin,Neurology,9
+28,Dr. Brian Hayes,Internal Medicine,10
+29,Dr. Cindy Morris,Family Medicine,10
+30,Dr. Derek Bryant,Psychiatry,10
+31,Dr. Emily Foster,Urology,11
+32,Dr. Fred Simmons,Orthopedics,11
+33,Dr. Gina Lawson,Dermatology,11
+34,Dr. Howard Newman,Cardiology,12
+35,Dr. Isabelle Porter,OB/GYN,12
+36,Dr. Jason Black,Oncology,12
+37,Dr. Kelly Owens,Pediatrics,13
+38,Dr. Liam Rice,Neurology,13
+39,Dr. Monica Watts,Internal Medicine,13
+40,Dr. Neil Hudson,ENT,14
+41,Dr. Opal Douglas,Cardiology,14
+42,Dr. Peter Fields,Family Medicine,14
+43,Dr. Queen Norris,Urology,15
+44,Dr. Ron Palmer,Dermatology,15
+45,Dr. Sara Gill,Psychiatry,15
+46,Dr. Tom Vaughn,General Surgery,16
+47,Dr. Uma Knight,OB/GYN,16
+48,Dr. Vince Drake,Orthopedics,16
+49,Dr. Wendy Dean,Pediatrics,17
+50,Dr. Xander Miles,Neurology,17
+51,Dr. Yara Ellis,Internal Medicine,17
+52,Dr. Zane Ray,Cardiology,18
+53,Dr. Angela Frost,Endocrinology,18
+54,Dr. Bruce Waters,General Surgery,18
+55,Dr. Cathy Sherman,OB/GYN,19
+56,Dr. Doug Parks,Orthopedics,19
+57,Dr. Ella Norton,Psychiatry,19
+58,Dr. Freda King,Urology,20
+59,Dr. George Allen,Family Medicine,20
+60,Dr. Hannah Cole,Dermatology,20

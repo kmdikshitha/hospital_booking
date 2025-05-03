@@ -1,14 +1,37 @@
+# import os
+
+# basedir = os.path.abspath(os.path.dirname(__file__))
+
+# class Config:
+#     SECRET_KEY = 'your-secret'
+    
+#     # Check if we are in a production environment or not
+#     if os.getenv('FLASK_ENV') == 'production':
+#         # Use Render's persistent storage for SQLite
+#         SQLALCHEMY_DATABASE_URI = 'sqlite:///mnt/data/hospital.db'
+#     else:
+#         # Use the local directory for SQLite when developing locally
+#         SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'hospital.db')
+    
+#     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+
 import os
 
-class Config:
-    MYSQL_HOST = 'localhost'  # Change to your MySQL host
-    MYSQL_USER = 'root'  # Change to your MySQL username
-    MYSQL_PASSWORD = 'new_password'  # Change to your MySQL password
-    MYSQL_DB = 'hospital_booking'  # Database name
+from dotenv import load_dotenv
+load_dotenv()
 
-    # SQLAlchemy Configuration
-    SQLALCHEMY_DATABASE_URI = f'mysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}/{MYSQL_DB}'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False  # Disable Flask-SQLAlchemy modification tracking
-    
-    # JWT Configuration
-    JWT_SECRET_KEY = '4dbce7d57c803436fbbdcbeb9719918e651df0db2e9c6f399a3321252a10c581'  # Change this to a strong secret key
+
+class Config:
+    SECRET_KEY = os.getenv('SECRET_KEY', 'your-secret')
+    SQLALCHEMY_DATABASE_URI = (
+        'postgresql://{username}:{password}@{host}:{port}/{database_name}'
+        .format(
+            username=os.getenv('POSTGRES_USER'),
+            password=os.getenv('POSTGRES_PASSWORD'),
+            host=os.getenv('POSTGRES_HOST'),
+            port=os.getenv('POSTGRES_PORT', 5432),
+            database_name=os.getenv('POSTGRES_DB')
+        )
+    )
+    SQLALCHEMY_TRACK_MODIFICATIONS = False

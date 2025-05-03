@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 style="text-align: center; margin-bottom: 2rem;">
+  Book Appointment with {{ doctor.name }}
+</h2>
+
+<div class="appointment-container">
+  <form method="POST" class="appointment-form">
+    <label for="slot">Select a date & time:</label>
+    <select name="slot_id" id="slot" required>
+      {% for slot in doctor.availabilities if not slot.is_booked %}
+        <option value="{{ slot.id }}">
+          {{ slot.date.strftime('%Y-%m-%d') }} |
+          {{ slot.from_time.strftime('%I:%M %p') }} - {{ slot.to_time.strftime('%I:%M %p') }}
+        </option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="book-btn">Book</button>
+  </form>
+</div>
+
+{% endblock %}

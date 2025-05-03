@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+
+# Flask-migrate database migrations
+migrations/
+
+# Database files (optional, based on your setup)
+*.sqlite3
+*.db
+
+# Windows specific files
+Thumbs.db
+ehthumbs.db
+
+# VS Code settings
+.vscode/
+
+# Logs
+*.log
+
+# Environment variables
+.env

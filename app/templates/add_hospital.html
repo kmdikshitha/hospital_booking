@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="hospital-form-container">
+    <div class="hospital-form-box">
+        <h2>Add New Hospital</h2>
+        <form method="POST">
+            <label for="name">Hospital Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter hospital name" required>
+            
+            <label for="location">Location</label>
+            <select name="location_id" id="location" required>
+                {% for location in locations %}
+                    <option value="{{ location.id }}">{{ location.region }}</option>
+                {% endfor %}
+            </select>
+            
+            <input type="submit" value="Add Hospital">
+        </form>
+    </div>
+</div>
+{% endblock %}

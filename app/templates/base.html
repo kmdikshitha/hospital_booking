@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hospital Appointment System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    {% if request.endpoint not in ['main.login', 'main.register'] %}
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span class="brand-name">MediSlot</span>
+        </div>
+        <div class="navbar-right">
+            <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('main.view_appointments') }}">Appointments</a>
+            <a href="{{ url_for('main.logout') }}">Logout</a>
+        </div>
+    </nav>
+    {% endif %}
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+          <p style="color:red;">{{ msg }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    
+    {% block content %}{% endblock %}
+</body>
+</html>

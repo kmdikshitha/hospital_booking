@@ -13,7 +13,7 @@ main = Blueprint('main', __name__)
 def home():
     return redirect(url_for('main.login'))
 
-@app.route('/health')
+@main.route('/health')
 def health_check():
     return 'OK', 200
 

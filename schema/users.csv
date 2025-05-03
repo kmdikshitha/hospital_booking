@@ -1,3 +1,11 @@
 id,username,password,role
 1,john_doe,password123,user
 2,admin,admin,admin
+3,super_admin,super@admin123,admin
+4,jane_smith,jsmith2024,user
+5,michael_brown,mbrown@456,user
+6,robert_jones,robert2023,user
+7,linda_green,lindagreen,user
+8,sam_taylor,samt123,user
+9,alex_morgan,alexpass,user
+10,nancy_clark,nancyc2024,user

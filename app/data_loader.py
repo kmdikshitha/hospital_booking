@@ -43,22 +43,7 @@ def load_users():
         print(f"✅ Loaded user: {row['username']} with role: {row['role']}")
     
     db.session.commit()
-
-
-
-
-
-def load_appointments():
-    df = pd.read_csv('schema/appointments.csv')
-    for _, row in df.iterrows():
-        appointment = Appointment(
-            user_id=row['user_id'],
-            doctor_id=row['doctor_id'],
-            slot_id=row['slot_id']
-        )
-        db.session.add(appointment)
-    db.session.commit()
-
+    
 def load_locations():
     df = pd.read_csv('schema/locations.csv')
     for _, row in df.iterrows():

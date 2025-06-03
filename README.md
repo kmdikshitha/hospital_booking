@@ -13,6 +13,7 @@ A Flask-based web application for booking and managing doctor appointments. It s
 - CSV-based data loading with SQLAlchemy ORM
 
 ---
+[Idea Proposal)]([https://github.com/TMS-CrimsonCompass/TMS_OAuth/tree/master](https://docs.google.com/presentation/d/1TZGYs2qMudpBfxa9qPz-IZrZgaXiZ7sDxSmsqEJMU5o/edit?usp=sharing))
 
 ## 🚀 Getting Started
 
